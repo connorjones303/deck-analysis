@@ -183,6 +183,16 @@ class Collection {
     // this._initCollectionFromCollectionElements(newElemsList);
   }
 
+  addNewRandomElement() {
+    const oldElemsList = this.listCollectionElements();
+    const largetPartId = this.partition.reduce((accumulator, currentValue) => accumulator + currentValue, 0);
+    const elementName = `new card ${largetPartId + 1}`
+    const newElemsList = [...oldElemsList, elementName];
+    return newElemsList
+    // avoid changing obj directly for now
+    // this._initCollectionFromCollectionElements(newElemsList);
+  }
+
   /**
    * Removes the first occurrence of an element from the collection
    * @param {string} element - The name of the element to remove

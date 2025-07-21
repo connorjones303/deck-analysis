@@ -65,8 +65,8 @@ export const Deck = function (tag, props, children = []) {
   const cards = Object.values(collection.elements);
 
   return node(tag, { class: 'deck-container', ...otherProps }, [
-    ...children,
     node('h3', {}, [collection.name]),
+    ...children,
     node('div', { class: 'cards-container' },
       cards.map((card, i) =>
         Card('div', { card: card, key: `card-${card.id}`, class: `card part-group-${card.partId}` })
@@ -80,5 +80,39 @@ export const Button = function (tag, props, children = []) {
 }
 
 export const ButtonRow = function (tag, props, children = []) {
-  return node(tag, { ...props }, children)
+  return node(tag, { class: 'buttonRow', ...props }, children)
 }
+
+/**
+ * @param {string} tag - HTML element tag (e.g <div>)
+ * @param {Object} props - Props for the component
+ * @param {Object} props.decks - The collection of decks
+ * @param {Function} props.handleDeckSelection - The function to handle deck selection
+ * @param {Array} [children=[]] - Child elements
+ * @returns {node}
+ */
+export const DeckContainer = function (tag, props, children = []) {
+  const { decks, handleActiveDeckSelection, handleNewDeck, ...otherProps } = props;
+  console.log('decks that container uses ', decks)
+
+  return node(tag, { class: 'deck-container', ...otherProps }, [
+    ...children,
+    node('div', { class: 'decks' },
+      Object.values(decks).map((deck, i) => {
+        console.log(deck.id)
+        return (node('button', {
+          key: `deck-${deck.id}`,
+          class: 'deck-select-button',
+          onClick: () => handleActiveDeckSelection(deck.id)
+        }, [
+          node('h3', {}, [deck.name])
+        ]))
+      }
+      )
+    ),
+    Button('button', {
+      onClick: handleNewDeck, // Calls the function to create a new deck
+      class: 'card-button add-new-button'
+    }, ['Add New Deck'])
+  ]);
+};

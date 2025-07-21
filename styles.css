@@ -115,11 +115,25 @@
     box-shadow: 0 4px 15px rgba(136, 216, 163, 0.4);
 }
 
+
 .add-button:hover {
     background: linear-gradient(135deg, #88d8a3 0%, #68c583 100%);
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(136, 216, 163, 0.6);
 }
+
+.add-new-button {
+    background: linear-gradient(135deg, #4e92f1 0%, #3498db 100%);
+    color: #ffffff;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.add-new-button:hover {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+}
+
 
 .delete-button {
     background: linear-gradient(135deg, #ffaaa5 0%, #ff8a80 100%);
