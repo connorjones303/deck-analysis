@@ -1,9 +1,135 @@
-.card {
-  outline: auto;
-  display: flex;
-}
+/* Cards Container */
 .cards-container {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    padding: 32px;
+    background: linear-gradient(135deg, #f4f7f9 0%, #d1dfe7 100%); /* Softer gradient */
+    min-height: 100vh;
 }
+
+/* Individual Card */
+.card {
+    border: none;
+    border-radius: 20px;
+    padding: 24px;
+    backdrop-filter: blur(10px);
+    background-color: #f0f4f7; /* Light soft beige */
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    min-width: 280px;
+    max-width: 320px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+}
+
+/* Card Button Container */
+.card-button-container {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+/* Card Header */
+.card-header {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    color: #34495e; /* Neutral dark grey-blue */
+    border-bottom: 3px solid transparent;
+    padding-bottom: 12px;
+    text-align: center;
+}
+
+/* Card Details Container */
+.card-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* Individual Detail Items */
+.card-details > div {
+    font-size: 14px;
+    color: #6a7c8a; /* Muted grey-blue text */
+    padding: 8px 12px;
+    background: linear-gradient(135deg, #e7eef2 0%, #f2f7fb 100%); /* Soft blue gradient */
+    border-radius: 12px;
+    border-left: 4px solid #b0c8d7; /* Subtle blue accent */
+    font-weight: 500;
+}
+
+/* Add subtle animation to detail items */
+.card-details > div:hover {
+    background: linear-gradient(135deg, #d1e8d5 0%, #e1e9f1 100%);
+    transform: translateX(4px);
+    transition: all 0.2s ease;
+}
+
+/* Optional: Add some responsive behavior */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .card {
+        width: 100%;
+        max-width: 350px;
+        min-width: 280px;
+    }
+    
+    .card-button-container {
+        gap: 8px;
+    }
+    
+    .card-button {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+}
+
+
+/* Card Buttons */
+.card-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    flex: 1;
+}
+
+.add-button {
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+    color: #2d5a41;
+    box-shadow: 0 4px 15px rgba(136, 216, 163, 0.4);
+}
+
+.add-button:hover {
+    background: linear-gradient(135deg, #88d8a3 0%, #68c583 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(136, 216, 163, 0.6);
+}
+
+.delete-button {
+    background: linear-gradient(135deg, #ffaaa5 0%, #ff8a80 100%);
+    color: #8b2635;
+    box-shadow: 0 4px 15px rgba(255, 170, 165, 0.4);
+}
+
+.delete-button:hover {
+    background: linear-gradient(135deg, #ff8a80 0%, #ff7675 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 170, 165, 0.6);
+}
+

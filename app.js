@@ -1,16 +1,18 @@
 import { vdom } from "./vdom.js"
 import { Deck, ButtonRow, Button } from "./components.js";
 import { Collection } from "./collection.js";
+import { stylingUtil } from "./styling-util.js";
 
-const testCollection = new Collection({ elementsList: ['a', 'a', 'b', 'c', 'd'] });
-let state = {
+
+export const testCollection = new Collection({ elementsList: ['a', 'a', 'b', 'c', 'd'] });
+export let state = {
   decks: { [testCollection.id]: testCollection }
 };
 
 const container = document.getElementById('app');
 export const { vtree, handlers, node, render } = vdom(container)
 
-function setState(newState) {
+export function setState(newState) {
   state = { ...state, ...newState };
   renderApp();
 }
@@ -25,7 +27,7 @@ const handleAddCard = () => {
 
 const handleDeleteCard = () => {
   const oldDeck = state.decks[testCollection.id];
-  if (!oldDeck.listCollectionElements().includes('x')) { return; }
+  if (!oldDeck.listCollectionElements().includes('x')) { return }
   const newElems = oldDeck.removeElement('x');
   const newDeck = new Collection({ elementsList: newElems, id: oldDeck.id });
   setState({ decks: { ...state.decks, [oldDeck.id]: newDeck } });
@@ -45,6 +47,9 @@ function renderApp() {
     Deck('div', { collection: state.decks[testCollection.id] })
   ]);
   render(vtree);
+
+
+  stylingUtil();
   console.log('handlers', handlers)
   console.log('state ', state)
 }

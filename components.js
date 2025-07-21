@@ -1,20 +1,57 @@
 import { CollectionElement, Collection } from "./collection.js";
-import { node } from "./app.js";
+import { node, state, setState, testCollection } from "./app.js";
 
 /**
- * @param {CollectionElement} card
+ * @param {CollectionElement} card 
+ */
+const handleDeleteCardSelf = (card) => {
+  const name = card.name
+  const oldDeck = state.decks[testCollection.id];
+  if (!oldDeck.listCollectionElements().includes(name)) { return }
+  const newElems = oldDeck.removeElement(name);
+  const newDeck = new Collection({ elementsList: newElems, id: oldDeck.id });
+  setState({ decks: { ...state.decks, [oldDeck.id]: newDeck } });
+};
+
+/**
+ * @param {CollectionElement} card 
+ */
+const handleAddCardSelf = (card) => {
+  const name = card.name
+  const oldDeck = state.decks[testCollection.id];
+  if (!oldDeck.listCollectionElements().includes(name)) { return }
+  const newElems = oldDeck.addElement(name);
+  const newDeck = new Collection({ elementsList: newElems, id: oldDeck.id });
+  setState({ decks: { ...state.decks, [oldDeck.id]: newDeck } });
+};
+
+/**
+ * @param {string} tag - html element tag (e.g <div>)
+ * @param {Object} props - any other props
+ * @param {CollectionElement} props.card - The card data object
+ * @param {Array} [children=[]] - Child elements
  * @returns {node}
  */
 export const Card = function (tag, props, children = []) {
   const { card, ...otherProps } = props;
   return node(tag, { ...otherProps }, [
+    node('div', { class: 'card-button-container' }, [
+      node('button', {
+        class: 'card-button add-button',
+        onClick: () => handleAddCardSelf(card)
+      }, ['Add']),
+      node('button', {
+        class: 'card-button delete-button',
+        onClick: () => handleDeleteCardSelf(card)
+      }, ['Remove'])
+    ]),
     node('div', { class: 'card-header' }, ['Card']),
-    ...children,
     node('div', { class: 'card-details' },
       Object.entries(card).map(([key, val], i) => {
         return node('div', { key: `${card.id}-${key}` }, [`${key}: ${val}`])
       })
-    )
+    ),
+    ...children
   ])
 }
 
@@ -32,7 +69,7 @@ export const Deck = function (tag, props, children = []) {
     node('h3', {}, [collection.name]),
     node('div', { class: 'cards-container' },
       cards.map((card, i) =>
-        Card('div', { card: card, key: `card-${card.id}`, class: 'card' })
+        Card('div', { card: card, key: `card-${card.id}`, class: `card part-group-${card.partId}` })
       )
     )
   ]);
