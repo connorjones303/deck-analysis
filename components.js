@@ -93,16 +93,14 @@ export const ButtonRow = function (tag, props, children = []) {
  */
 export const DeckContainer = function (tag, props, children = []) {
   const { decks, handleActiveDeckSelection, handleNewDeck, ...otherProps } = props;
-  console.log('decks that container uses ', decks)
 
   return node(tag, { class: 'deck-container', ...otherProps }, [
     ...children,
     node('div', { class: 'decks' },
       Object.values(decks).map((deck, i) => {
-        console.log(deck.id)
         return (node('button', {
           key: `deck-${deck.id}`,
-          class: 'deck-select-button',
+          class: 'deck-select-button card-button',
           onClick: () => handleActiveDeckSelection(deck.id)
         }, [
           node('h3', {}, [deck.name])
@@ -112,7 +110,7 @@ export const DeckContainer = function (tag, props, children = []) {
     ),
     Button('button', {
       onClick: handleNewDeck, // Calls the function to create a new deck
-      class: 'card-button add-new-button'
+      class: 'add-new-button'
     }, ['Add New Deck'])
   ]);
 };

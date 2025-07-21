@@ -69,31 +69,60 @@
     transition: all 0.2s ease;
 }
 
-/* Optional: Add some responsive behavior */
-@media (max-width: 768px) {
-    .cards-container {
-        flex-direction: column;
-        align-items: center;
-        padding: 20px;
-        gap: 16px;
-    }
-    
-    .card {
-        width: 100%;
-        max-width: 350px;
-        min-width: 280px;
-    }
-    
-    .card-button-container {
-        gap: 8px;
-    }
-    
-    .card-button {
-        font-size: 12px;
-        padding: 8px 16px;
-    }
+/* Deck Container */
+.deck-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    background: linear-gradient(135deg, #f4f7f9 0%, #d1dfe7 100%); /* Softer gradient */
 }
 
+/* Deck Button */
+.deck-select-button {
+    background: linear-gradient(135deg, #a8e6cf 0%, #88d8a3 100%);
+    color: #2d5a41;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(136, 216, 163, 0.4);
+    margin: 5px;
+}
+
+.deck-select-button:hover {
+    background: linear-gradient(135deg, #88d8a3 0%, #68c583 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(136, 216, 163, 0.6);
+}
+
+/* New Deck Button */
+.add-new-button {
+    display: flex;
+    background: linear-gradient(135deg, #4e92f1 0%, #3498db 100%);
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4);
+}
+
+.add-new-button:hover {
+    background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(52, 152, 219, 0.6);
+}
 
 /* Card Buttons */
 .card-button {
@@ -147,3 +176,37 @@
     box-shadow: 0 6px 20px rgba(255, 170, 165, 0.6);
 }
 
+/* Optional: Add some responsive behavior */
+@media (max-width: 768px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        gap: 16px;
+    }
+    
+    .card {
+        width: 100%;
+        max-width: 350px;
+        min-width: 280px;
+    }
+    
+    .card-button-container {
+        gap: 8px;
+    }
+    
+    .card-button {
+        font-size: 12px;
+        padding: 8px 16px;
+    }
+
+    .deck-container {
+        padding: 20px;
+    }
+
+    .deck-select-button,
+    .add-new-button {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

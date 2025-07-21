@@ -28,6 +28,7 @@ const handleNewUniqueCard = (activeDeck) => {
 
 const handleActiveSelectActiveDeck = (deckId) => {
   setState({ activeDeckId: deckId });
+  console.log('here at id ', deckId)
 };
 
 const handleNewDeck = () => {
@@ -72,4 +73,3 @@ function renderApp() {
 
 // Initial render
 renderApp();
-console.log('init render app');
