@@ -92,18 +92,18 @@ export const ButtonRow = function (tag, props, children = []) {
  * @returns {node}
  */
 export const DeckContainer = function (tag, props, children = []) {
-  const { decks, handleActiveDeckSelection, handleNewDeck, ...otherProps } = props;
-
-  return node(tag, { class: 'deck-container', ...otherProps }, [
-    ...children,
+  const { handleSelectActiveDeck, handleNewDeck, ...otherProps } = props;
+  return node(tag, { class: 'all-deck-container', ...otherProps }, [
     node('div', { class: 'decks' },
-      Object.values(decks).map((deck, i) => {
+      Object.values(children).map((deck) => {
         return (node('button', {
           key: `deck-${deck.id}`,
           class: 'deck-select-button card-button',
-          onClick: () => handleActiveDeckSelection(deck.id)
+          onClick: () => {
+            handleSelectActiveDeck(deck.id)
+          }
         }, [
-          node('h3', {}, [deck.name])
+          deck.name
         ]))
       }
       )

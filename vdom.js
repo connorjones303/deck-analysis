@@ -104,7 +104,7 @@ export function vdom(container = null) {
     vtree = newTree;
     delegateHandlers()
     root.innerHTML = nodeToHTML(vtree);
-    handlers = [] // clear handlers after render
+    handlers = [] // clear handlers used to make attachments after render
     nodeIdCounter = 0 // reset id counter
   }
 

@@ -7,7 +7,7 @@ import { stylingUtil } from "./styling-util.js";
 export const testCollection = new Collection({ elementsList: ['a', 'a', 'b', 'c', 'd'] });
 export let state = {
   decks: { [testCollection.id]: testCollection },
-  activeDeckId: testCollection.id // Keep track of the active deck
+  activeDeckId: testCollection.id
 };
 
 const container = document.getElementById('app');
@@ -26,15 +26,13 @@ const handleNewUniqueCard = (activeDeck) => {
   setState({ decks: { ...state.decks, [activeDeck.id]: newDeck } });
 };
 
-const handleActiveSelectActiveDeck = (deckId) => {
+const handleSelectActiveDeck = (deckId) => {
+  const decks = state.decks
   setState({ activeDeckId: deckId });
-  console.log('here at id ', deckId)
 };
 
 const handleNewDeck = () => {
   const newDeckIndex = Object.keys(state.decks).length + 1;
-  const newDeckName = `Deck ${newDeckIndex}`;
-
   // Create a new deck with default name and an empty collection
   const newDeck = new Collection({ elementsList: [], name: `deck-${newDeckIndex}` });
 
@@ -49,11 +47,12 @@ const handleNewDeck = () => {
 };
 
 function renderApp() {
-  const activeDeck = state.decks[state.activeDeckId]; // Get the active deck
   const decks = state.decks
+  const activeDeck = decks[state.activeDeckId]; // Get the active deck
+  console.log('active deck id ', state.activeDeckId)
   const vtree = node('div', { class: 'root' }, [
     node('div', { class: 'title' }, ['Deck calculator']),
-    DeckContainer('div', { decks: decks, handleActiveDeckSelection: handleActiveSelectActiveDeck, handleNewDeck: handleNewDeck }),
+    DeckContainer('div', { handleSelectActiveDeck: handleSelectActiveDeck, handleNewDeck: handleNewDeck }, [...Object.values(decks)]),
     // Render the selected active deck
     Deck('div', { collection: activeDeck }, [
       ButtonRow('div', {}, [
@@ -67,8 +66,8 @@ function renderApp() {
 
   render(vtree);
   stylingUtil();
-  console.log('handlers', handlers)
-  console.log('state ', state)
+  // console.log('handlers', handlers)
+  // console.log('state ', state)
 }
 
 // Initial render

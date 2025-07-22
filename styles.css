@@ -75,7 +75,7 @@
     flex-direction: column;
     gap: 5px;
     padding: 5px;
-    background: linear-gradient(135deg, #f4f7f9 0%, #d1dfe7 100%); /* Softer gradient */
+    background: linear-gradient(135deg, #f4f7f9 0%, #d1dfe7 100%); Softer gradient
 }
 
 /* Deck Button */
